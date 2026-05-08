@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>בשביל הלב — סדנאות ODT | חוויה. תנועה. חיבור.</title>
+<title>בשביל הלב · סדנאות ODT | חוויה. תנועה. חיבור.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
@@ -489,15 +489,64 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
   /* ---------- VIDEO TESTIMONIALS ---------- */
   .vtest{ background: var(--cream); }
-  .vtest-grid{
+  .vtest-strip{
     margin-top: 56px;
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
-  @media (max-width:1100px){ .vtest-grid{ grid-template-columns: repeat(3, 1fr); gap:16px; } }
-  @media (max-width:780px){ .vtest-grid{ grid-template-columns: repeat(2, 1fr); gap:12px; } }
-  @media (max-width:480px){ .vtest-grid{ grid-template-columns:1fr; } }
+  .vtest-item{
+    flex: 0 0 auto;
+    width: min(236px, 78vw);
+    scroll-snap-align: start;
+  }
+  .vtest-item .vcard{ margin-bottom: 0; }
+  .vtest-caption{
+    margin-top: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding-inline: 2px;
+  }
+  .vtest-caption-text .vname{
+    font-family:'FUP Begin','Rubik',sans-serif;
+    font-weight:700;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .vtest-caption-text .vrole{
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.35;
+  }
+  .vcard-mute{
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .2s, background .2s, color .2s;
+  }
+  .vcard-mute:hover{
+    border-color: var(--terra);
+    color: var(--terra-deep);
+  }
+  .vcard-mute svg{ display:block; }
   .vcard{
     position:relative;
     aspect-ratio: 9/14;
@@ -516,6 +565,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     width:100%; height:100%;
     object-fit: cover;
     border:0;
+    z-index:2;
   }
   .vcard > img{ opacity:.78; transition: opacity .4s, transform .6s; }
   .vcard:hover > img{ opacity:.92; transform: scale(1.03); }
@@ -546,20 +596,6 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     animation: stickerRing 2.8s ease-out infinite;
     pointer-events:none;
   }
-  .vcard .vmeta{
-    position:absolute; inset: auto 18px 18px 18px;
-    color:#fff;
-  }
-  .vcard .vname{
-    font-family:'FUP Begin','Rubik',sans-serif;
-    font-weight:700; font-size: 17px;
-    margin-bottom: 4px;
-  }
-  .vcard .vrole{
-    font-size: 13px;
-    color: rgba(255,255,255,.78);
-    line-height: 1.4;
-  }
   .vcard .vchip{
     position:absolute; top:14px; right:14px;
     background: rgba(255,255,255,.92);
@@ -574,7 +610,6 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   }
   .vcard.is-playing .vplay,
   .vcard.is-playing .veil,
-  .vcard.is-playing .vmeta,
   .vcard.is-playing .vchip,
   .vcard.is-playing > img{ display:none; }
 
@@ -657,10 +692,28 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     cursor:pointer;
     box-shadow: 0 40px 80px -30px rgba(0,0,0,.6);
   }
-  .video-feature img{ width:100%; height:100%; object-fit:cover; opacity:.7; transition: opacity .4s, transform .6s;}
+  .video-feature img{
+    position:relative;
+    z-index:1;
+    width:100%; height:100%; object-fit:cover; opacity:.7; transition: opacity .4s, transform .6s;
+  }
   .video-feature:hover img{ opacity:.85; transform:scale(1.02); }
+  .video-feature video,
+  .video-feature iframe{
+    position:absolute; inset:0; z-index:3;
+    width:100%; height:100%;
+    object-fit:cover;
+    border:0;
+    background:#000;
+  }
+  .video-feature.is-playing img,
+  .video-feature.is-playing .play{
+    opacity:0;
+    pointer-events:none;
+  }
   .video-feature .play{
     position:absolute; inset:0;
+    z-index:2;
     display:flex; align-items:center; justify-content:center;
     flex-direction:column; gap:16px;
   }
@@ -724,15 +777,26 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
   .quotes-grid{
     margin-top:48px;
-    columns: 3 320px;
-    column-gap: 22px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 18px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
   .quote-card{
-    break-inside: avoid;
+    flex: 0 0 auto;
+    width: min(340px, 88vw);
+    max-width: 360px;
+    scroll-snap-align: start;
     background: #fff;
     border-radius:18px;
     padding: 32px 30px;
-    margin-bottom: 22px;
+    margin-bottom: 0;
     border: 1px solid var(--rule);
     position:relative;
     transition: transform .3s, box-shadow .3s;
@@ -885,13 +949,32 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     text-transform:uppercase;
   }
   .clients-row{
-    display:flex; flex-wrap:wrap; gap: 36px 60px;
-    align-items:center; justify-content:center;
-    opacity:.75;
+    display:flex; flex-wrap:nowrap;
+    gap: 14px;
+    align-items:stretch;
+    justify-content:flex-start;
+    overflow-x:auto;
+    overflow-y:visible;
+    padding-bottom:10px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
   }
-  .clients-row img{ height:40px; width:auto; filter: grayscale(1); opacity:.8; transition: filter .2s, opacity .2s;}
-  @media (max-width:640px){ .clients-row{ gap:24px 36px; } .clients-row img{ height:34px; } }
-  .clients-row img:hover{ filter:none; opacity:1;}
+  .clients-photo{
+    flex:0 0 auto;
+    width:148px;
+    height:104px;
+    border-radius:14px;
+    overflow:hidden;
+    scroll-snap-align:start;
+    box-shadow:0 14px 36px -18px rgba(42,27,18,.35);
+  }
+  .clients-photo img{
+    width:100%; height:100%; object-fit:cover;
+    display:block;
+    transition:transform .45s ease;
+  }
+  .clients-photo:hover img{ transform:scale(1.06); }
 
   /* ---------- FINAL CTA ---------- */
   .final-cta{
@@ -1299,7 +1382,6 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     .hero .scrib-bg{ display:none; }
     .hero::before{ right:-160px; top:-160px; }
     .hero::after{ left:-100px; bottom:-140px; }
-    .quotes-grid{ columns: 1; }
     .deco-dot{ display:none; }
   }
 </style>
@@ -1347,14 +1429,14 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
         <span class="scribble">בסוף השבוע.</span>
       </h1>
       <p class="lede" data-reveal>
-        סדנאות ODT שמחברות את הצוות שלכם דרך חוויה — לא דרך הרצאה.
-        מותאם אישית לדינמיקה של הארגון, מ־8 עד 500 משתתפים, בטבע או בחלל סגור.
+        סדנאות ODT שמחברות את הצוות שלכם דרך חוויה, לא דרך הרצאה.
+        מותאם אישית לדינמיקה של הקבוצה שלכם, מ-8 עד 500 משתתפים, בטבע או בחלל סגור.
       </p>
       <div class="trust" data-reveal>
         <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> מעל 500 קבוצות</span>
         <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> מנחים בהכשרה מקצועית</span>
         <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> מגיעים לכל מקום בארץ</span>
-        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> התאמה אישית לכל ארגון</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> התאמה אישית לכל קבוצה</span>
       </div>
       <div class="cta-row" data-reveal>
         <a href="https://wa.me/972528990156?text=שלום,%20אשמח%20לשמוע%20עוד" target="_blank" class="btn-primary">
@@ -1382,30 +1464,31 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   <div class="wrap">
     <div class="section-eyebrow" data-reveal>מי אנחנו</div>
     <h2 class="section-title" data-reveal>
-      יאיר ואביתר —<br/>
-      ושאר הצוות שעומד מאחורי "בשביל הלב".
+      יאיר ואביתר,<br/>
+      מייסדי בשביל הלב.
     </h2>
 
     <div class="about-grid">
       <div class="about-photos" data-reveal>
         <figure class="about-founders-fig">
-          <img src="assets/aviandyer.jpeg" alt="אביתר ויאיר — מייסדי 'בשביל הלב'" loading="lazy" decoding="async">
+          <img src="assets/founders-shirts.jpeg" alt="יאיר ואביתר עם חולצות בשביל הלב" loading="lazy" decoding="async">
         </figure>
         <p class="about-founders-caption">אביתר ויאיר · המייסדים</p>
       </div>
 
       <div class="about-text" data-reveal>
-        <p class="lead-line">
-          האמנו תמיד שיש דרך אחרת —<br/>
-          כזו שעוברת <em>דרך הלב.</em>
+        <p>
+          אנחנו יאיר ואביתר, אנשי חינוך, מילואימניקים גאים ותושבי הנגב.
         </p>
         <p>
-          "בשביל הלב" נולד מתוך אמונה שבכל קבוצה — צוות עבודה, יחידה צבאית, כיתה או משפחה — מסתתרים רגעים של חיבור אמיתי שמחכים שמישהו יעזור להם לצוף. בנינו צוות מנחים מנוסה, שמגיע מעולמות החינוך, הצבא והדרכת קבוצות, עם הכשרה מקצועית ולב פתוח.
+          הדרך שלנו התחילה בעולמות החינוך הבלתי פורמלי, שם צברנו ניסיון רב בהנחיית קבוצות ובעבודת שטח. לפני כחמש שנים בחרנו להעתיק את חיינו ואת המשפחות שלנו להתיישבות חדשה בנגב, צעד שחיבר אותנו מחדש למרחבים ולאופקים חדשים.
         </p>
         <p>
-          לאורך השנים ליווינו מאות יחידות צה"ל, צוותי הייטק וביטחון, בתי ספר, תנועות נוער, משפחות ואירועים. בכל פעילות אנחנו מקפידים על אותו עיקרון: לקרוא את הקבוצה, להתאים את הפעילות לצרכים שלה, ולסיים בעיבוד שמחבר את החוויה לחיים.
+          כשפגשנו את עולם ODT, הבנו שמצאנו את הדרך המדויקת ביותר עבורנו לעבוד עם אנשים. כבעלי תואר בחינוך וכמנחים ותיקים שפגשו מאות קבוצות, אנחנו יודעים שפעילות נכונה בשטח היא הרבה יותר מיום כיף רגיל: היא כלי עוצמתי ליצירת שינוי, לחיזוק האמון ולבניית אחריות.
         </p>
-        <div class="signature">בשביל הלב — בדיוק.</div>
+        <p>
+          החיבור האישי והמקצועי בינינו הוליד עסק שמוקדש כולו ליצירת תהליכים משמעותיים עבור קבוצות, ארגונים ויחידות צבאיות. אנחנו כאן כדי להביא את הלב לכל מפגש ולוודא שכל קבוצה שעוברת דרכנו יוצאת עם חותם אמיתי.
+        </p>
       </div>
     </div>
   </div>
@@ -1414,30 +1497,30 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 <!-- WHAT / MANIFESTO -->
 <section class="manifesto" id="what">
   <div class="wrap">
-    <div class="section-eyebrow" data-reveal>מה זה ODT — ולמה אצלנו זה אחרת</div>
+    <div class="section-eyebrow" data-reveal>מה זה ODT, ולמה אצלנו זה אחרת</div>
     <h2 class="section-title" data-reveal>
       ODT זה לא משחקי חברה.<br/>
       זה כלי שמשנה <em style="color:var(--terra); font-style:normal">דינמיקה.</em>
     </h2>
     <p class="lead" data-reveal>
-      ODT (Outdoor Training) הוא למידה חווייתית דרך פעילות, משחק ואתגר. אצלנו <em>החוויה היא אמצעי, לא מטרה</em> — דרך הפעילות נוצר חיבור אמיתי, עולים תהליכים שהיו מתחת לפני השטח, ומתקיים עיבוד שמחבר בין השטח למה שקורה אצלכם במשרד ביום־יום.
+      ODT (Outdoor Training) הוא למידה חווייתית דרך פעילות, משחק ואתגר. אצלנו <em>החוויה היא אמצעי, לא מטרה</em>: דרך הפעילות נוצר חיבור אמיתי, עולים תהליכים שהיו מתחת לפני השטח, ומתקיים עיבוד שמחבר בין השטח למה שקורה אצלכם בקבוצה ביום־יום.
     </p>
 
     <div class="pillars">
       <div class="pillar" data-reveal>
         <div class="num">01 · ההבדל</div>
-        <h3>חיבור אמיתי — לא "תרגילי אמון"</h3>
-        <p>לא שחוק, לא מאולץ. דינמיקה שחושפת איך הצוות באמת עובד יחד — ונותנת לכם כלים לקחת את זה הלאה.</p>
+        <h3>חיבור אמיתי, לא "תרגילי אמון"</h3>
+        <p>לא שחוק, לא מאולץ. דינמיקה שחושפת איך הצוות באמת עובד יחד, ונותנת לכם כלים לקחת את זה הלאה.</p>
       </div>
       <div class="pillar" data-reveal>
         <div class="num">02 · העומק</div>
         <h3>עיבוד עם משמעות</h3>
-        <p>כל פעילות נסגרת בשיחה שמחברת את מה שקרה בשטח — לחיים ולעבודה. זה המקום שבו התובנות נולדות.</p>
+        <p>כל פעילות נסגרת בשיחה שמחברת את מה שקרה בשטח לחיים ולעבודה. זה המקום שבו התובנות נולדות.</p>
       </div>
       <div class="pillar" data-reveal>
         <div class="num">03 · ההתאמה</div>
         <h3>נבנה סביב המטרות שלכם</h3>
-        <p>גיבוש, פיתוח מנהיגות, פתיחת שנה, סיום פרויקט — היום נבנה סביב מה שחשוב לכם, לא סביב תבנית.</p>
+        <p>גיבוש, פיתוח מנהיגות, פתיחת שנה, סיום פרויקט: היום נבנה סביב מה שחשוב לכם, לא סביב תבנית.</p>
       </div>
     </div>
   </div>
@@ -1453,12 +1536,12 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     </h2>
 
     <div class="audience-grid">
-      <a class="aud-card" data-reveal href="https://wa.me/972528990156?text=שלום,%20מעוניינים%20ביום%20גיבוש%20לארגון" target="_blank">
+      <a class="aud-card" data-reveal href="https://wa.me/972528990156?text=שלום,%20מעוניינים%20ביום%20גיבוש%20לקבוצה" target="_blank">
         <img src="assets/numbers-grass.jpeg" alt="">
         <div class="veil"></div>
-        <div class="chip">ארגונים</div>
+        <div class="chip">ארגונים וחינוך</div>
         <div class="txt">
-          <h3>חברות וצוותים</h3>
+          <h3>ארגונים, חברות ומוסדות חינוך</h3>
           <p>ימי גיבוש, כנסים, אירועי סיום שנה, קליטת עובדים.</p>
         </div>
       </a>
@@ -1492,7 +1575,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     </div>
 
     <p class="audience-note" data-reveal>
-      פעילות <b>מ־8 ועד 500 משתתפים</b> · כל תת־קבוצה של עד 25 מקבלת מנחה צמוד
+      פעילות <b>מ-8 ועד 500 משתתפים</b> · כל תת־קבוצה של עד 25 מקבלת מנחה צמוד
     </p>
   </div>
 </section>
@@ -1501,8 +1584,8 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 <section class="gallery" id="field">
   <div class="wrap">
     <div class="section-eyebrow" data-reveal>טעימה מהשטח</div>
-    <h2 class="section-title" data-reveal>ככה זה נראה באמת.</h2>
-    <p class="section-sub" data-reveal>בלי סטוק, בלי בימוי. הפרצופים, הצחוק, הרגעים של חיבור אמיתי.</p>
+    <h2 class="section-title" data-reveal>וככה זה נראה!!</h2>
+    <p class="section-sub" data-reveal>מהשטח, בלי בימוי.</p>
 
     <div class="video-feature" id="brandVideo" data-reveal data-video="assets/videos/brand.mp4" data-poster="assets/instructor-running.jpeg">
       <img src="assets/instructor-running.jpeg" alt="סרטון תדמית · בשביל הלב">
@@ -1538,116 +1621,172 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   <div class="wrap">
     <div class="section-eyebrow" data-reveal>סרטוני המלצות</div>
     <h2 class="section-title" data-reveal>
-      מה אומרים עלינו —<br/>
-      במילים שלהם, מול המצלמה.
+      מה אומרים עלינו,<br/>
+      במילים שלהם מול המצלמה.
     </h2>
     <p class="section-sub" data-reveal>
-      סרטונים אמיתיים מהשטח, מאנשים שהיו שם וחזרו עם משהו שלא חשבו שהם יחזרו איתו.
+      סרטונים מהשטח. גלילה ימינה ושמאלה, כפתור הקול מתחת לכל תמונה.
     </p>
 
-    <div class="vtest-grid">
-      <div class="vcard" data-reveal data-video="assets/videos/rec-1.mp4">
-        <img src="assets/army-circle.jpeg" alt="המלצה 1">
-        <div class="veil"></div>
-        <div class="vchip">המלצה</div>
-        <div class="vplay">
-          <div class="vplay-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <div class="vtest-strip">
+      <div class="vtest-item" data-reveal>
+        <div class="vcard" data-video="assets/videos/rec-1.mp4">
+          <img src="assets/army-circle.jpeg" alt="">
+          <div class="veil"></div>
+          <div class="vchip">המלצה</div>
+          <div class="vplay">
+            <div class="vplay-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
         </div>
-        <div class="vmeta">
-          <div class="vname">המלצה מהשטח</div>
-          <div class="vrole">לחצו לצפייה</div>
+        <div class="vtest-caption">
+          <div class="vtest-caption-text">
+            <div class="vname">המלצה מהשטח</div>
+            <div class="vrole">גלילה ימינה ושמאלה, לחצו על התמונה לניגון</div>
+          </div>
+          <button type="button" class="vcard-mute" aria-label="הפעילו קול">
+            <svg class="ico-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ico-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="vcard" data-reveal data-video="assets/videos/rec-2.mp4">
-        <img src="assets/girls-bridge.jpeg" alt="המלצה 2">
-        <div class="veil"></div>
-        <div class="vchip">המלצה</div>
-        <div class="vplay">
-          <div class="vplay-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div class="vtest-item" data-reveal>
+        <div class="vcard" data-video="assets/videos/rec-2.mp4">
+          <img src="assets/girls-bridge.jpeg" alt="">
+          <div class="veil"></div>
+          <div class="vchip">המלצה</div>
+          <div class="vplay">
+            <div class="vplay-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
         </div>
-        <div class="vmeta">
-          <div class="vname">המלצה מהשטח</div>
-          <div class="vrole">לחצו לצפייה</div>
+        <div class="vtest-caption">
+          <div class="vtest-caption-text">
+            <div class="vname">המלצה מהשטח</div>
+            <div class="vrole">גלילה ימינה ושמאלה, לחצו על התמונה לניגון</div>
+          </div>
+          <button type="button" class="vcard-mute" aria-label="הפעילו קול">
+            <svg class="ico-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ico-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="vcard" data-reveal data-video="assets/videos/rec-3.mp4">
-        <img src="assets/adults-sticks.jpeg" alt="המלצה 3">
-        <div class="veil"></div>
-        <div class="vchip">המלצה</div>
-        <div class="vplay">
-          <div class="vplay-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div class="vtest-item" data-reveal>
+        <div class="vcard" data-video="assets/videos/rec-3.mp4">
+          <img src="assets/adults-sticks.jpeg" alt="">
+          <div class="veil"></div>
+          <div class="vchip">המלצה</div>
+          <div class="vplay">
+            <div class="vplay-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
         </div>
-        <div class="vmeta">
-          <div class="vname">המלצה מהשטח</div>
-          <div class="vrole">לחצו לצפייה</div>
+        <div class="vtest-caption">
+          <div class="vtest-caption-text">
+            <div class="vname">המלצה מהשטח</div>
+            <div class="vrole">גלילה ימינה ושמאלה, לחצו על התמונה לניגון</div>
+          </div>
+          <button type="button" class="vcard-mute" aria-label="הפעילו קול">
+            <svg class="ico-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ico-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="vcard" data-reveal data-video="assets/videos/rec-4.mp4">
-        <img src="assets/army-men-circle.jpeg" alt="המלצה 4">
-        <div class="veil"></div>
-        <div class="vchip">המלצה</div>
-        <div class="vplay">
-          <div class="vplay-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div class="vtest-item" data-reveal>
+        <div class="vcard" data-video="assets/videos/rec-4.mp4">
+          <img src="assets/army-men-circle.jpeg" alt="">
+          <div class="veil"></div>
+          <div class="vchip">המלצה</div>
+          <div class="vplay">
+            <div class="vplay-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
         </div>
-        <div class="vmeta">
-          <div class="vname">המלצה מהשטח</div>
-          <div class="vrole">לחצו לצפייה</div>
+        <div class="vtest-caption">
+          <div class="vtest-caption-text">
+            <div class="vname">המלצה מהשטח</div>
+            <div class="vrole">גלילה ימינה ושמאלה, לחצו על התמונה לניגון</div>
+          </div>
+          <button type="button" class="vcard-mute" aria-label="הפעילו קול">
+            <svg class="ico-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ico-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="vcard" data-reveal data-video="assets/videos/rec-5.mp4">
-        <img src="assets/army-handcuffs.jpeg" alt="המלצה 5">
-        <div class="veil"></div>
-        <div class="vchip">המלצה</div>
-        <div class="vplay">
-          <div class="vplay-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div class="vtest-item" data-reveal>
+        <div class="vcard" data-video="assets/videos/rec-5.mp4">
+          <img src="assets/army-handcuffs.jpeg" alt="">
+          <div class="veil"></div>
+          <div class="vchip">המלצה</div>
+          <div class="vplay">
+            <div class="vplay-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
         </div>
-        <div class="vmeta">
-          <div class="vname">המלצה מהשטח</div>
-          <div class="vrole">לחצו לצפייה</div>
+        <div class="vtest-caption">
+          <div class="vtest-caption-text">
+            <div class="vname">המלצה מהשטח</div>
+            <div class="vrole">גלילה ימינה ושמאלה, לחצו על התמונה לניגון</div>
+          </div>
+          <button type="button" class="vcard-mute" aria-label="הפעילו קול">
+            <svg class="ico-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ico-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="vcard" data-reveal data-video="assets/videos/rec-6.mp4">
-        <img src="assets/girls-sticks.jpeg" alt="המלצה 6">
-        <div class="veil"></div>
-        <div class="vchip">המלצה</div>
-        <div class="vplay">
-          <div class="vplay-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div class="vtest-item" data-reveal>
+        <div class="vcard" data-video="assets/videos/rec-6.mp4">
+          <img src="assets/girls-sticks.jpeg" alt="">
+          <div class="veil"></div>
+          <div class="vchip">המלצה</div>
+          <div class="vplay">
+            <div class="vplay-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
         </div>
-        <div class="vmeta">
-          <div class="vname">המלצה מהשטח</div>
-          <div class="vrole">לחצו לצפייה</div>
+        <div class="vtest-caption">
+          <div class="vtest-caption-text">
+            <div class="vname">המלצה מהשטח</div>
+            <div class="vrole">גלילה ימינה ושמאלה, לחצו על התמונה לניגון</div>
+          </div>
+          <button type="button" class="vcard-mute" aria-label="הפעילו קול">
+            <svg class="ico-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ico-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="vcard" data-reveal data-video="assets/videos/rec-7.mp4">
-        <img src="assets/instructor-running.jpeg" alt="המלצה 7">
-        <div class="veil"></div>
-        <div class="vchip">המלצה</div>
-        <div class="vplay">
-          <div class="vplay-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <div class="vtest-item" data-reveal>
+        <div class="vcard" data-video="assets/videos/rec-7.mp4">
+          <img src="assets/instructor-running.jpeg" alt="">
+          <div class="veil"></div>
+          <div class="vchip">המלצה</div>
+          <div class="vplay">
+            <div class="vplay-btn">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
           </div>
         </div>
-        <div class="vmeta">
-          <div class="vname">המלצה מהשטח</div>
-          <div class="vrole">לחצו לצפייה</div>
+        <div class="vtest-caption">
+          <div class="vtest-caption-text">
+            <div class="vname">המלצה מהשטח</div>
+            <div class="vrole">גלילה ימינה ושמאלה, לחצו על התמונה לניגון</div>
+          </div>
+          <button type="button" class="vcard-mute" aria-label="הפעילו קול">
+            <svg class="ico-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg class="ico-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -1670,11 +1809,13 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       שהלב שלהם כבר מלא.
     </h2>
 
+    <p class="section-sub" data-reveal>גלילה ימינה ושמאלה בין ההמלצות.</p>
+
     <div class="quotes-filter" data-reveal>
       <button class="qfilter active" data-filter="all">הכל</button>
       <button class="qfilter" data-filter="army">צבא וביטחון</button>
       <button class="qfilter" data-filter="edu">חינוך ונוער</button>
-      <button class="qfilter" data-filter="corp">חברות וצוותים</button>
+      <button class="qfilter" data-filter="corp">ארגונים וחינוך</button>
       <button class="qfilter" data-filter="fam">משפחות</button>
     </div>
 
@@ -1696,7 +1837,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       <article class="quote-card" data-cat="edu">
         <div class="tag tag-edu">חינוך</div>
         <div class="mark">”</div>
-        <p class="body">יאיר נשמה!!!<br>הגענו לסדנה שלך אחרי יום שהתחיל במבחן ארוך, ואז הליכה ארוכה, ושמש, וחם, ולמי יש כח עכשיו לסדנת odt, כזאת שכבר עשינו כמה פעמים...<br>קמנו רק כי לא היה לנו נעים לסרב —<br>ואז —<br>וואו!!!<br>איזה קסם!!!<br>תוך שניות נדבקנו בהתלהבות שלך, לא שמנו לב שחם, שהשמש מסנוורת, התלהבנו מהמשימות כאילו זו פעם ראשונה שביקשו מאיתנו לעשות אותן. מדהים איך ההנחיה המקצועית שלך, ההתלהבות ותשומת הלב הפכו odt שגרתי לחוויה מלהיבה וחדשה!<br>לא רצינו להפסיק...<br>הצלחת להדליק את כל הקבוצה, לפרגן, להאיר את תשומת הלב למה שקורה בינינו ולהוריד כמה וכמה מחסומים.<br>היה קצר אבל כל כך כיף ומחבר!!<br>אין כמוך, תודה רבה</p>
+        <p class="body">יאיר נשמה!!!<br>הגענו לסדנה שלך אחרי יום שהתחיל במבחן ארוך, ואז הליכה ארוכה, ושמש, וחם, ולמי יש כח עכשיו לסדנת odt, כזאת שכבר עשינו כמה פעמים...<br>קמנו רק כי לא היה לנו נעים לסרב.<br>ואז<br>וואו!!!<br>איזה קסם!!!<br>תוך שניות נדבקנו בהתלהבות שלך, לא שמנו לב שחם, שהשמש מסנוורת, התלהבנו מהמשימות כאילו זו פעם ראשונה שביקשו מאיתנו לעשות אותן. מדהים איך ההנחיה המקצועית שלך, ההתלהבות ותשומת הלב הפכו odt שגרתי לחוויה מלהיבה וחדשה!<br>לא רצינו להפסיק...<br>הצלחת להדליק את כל הקבוצה, לפרגן, להאיר את תשומת הלב למה שקורה בינינו ולהוריד כמה וכמה מחסומים.<br>היה קצר אבל כל כך כיף ומחבר!!<br>אין כמוך, תודה רבה</p>
         <div class="attr">
           <div class="avatar">יע</div>
           <div class="who">
@@ -1709,7 +1850,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       <article class="quote-card" data-cat="corp">
         <div class="tag tag-corp">הייטק</div>
         <div class="mark">”</div>
-        <p class="body">חיפשנו פעילות מעניינת וחוויתית ליום גיבוש של צוות הפיתוח. מההתקשרות הראשונה עם יאיר הרגשנו בידיים טובות, החל מהבנת הצרכים והדינמיקה הייחודית בצוות ועד התאמה של הפעילות לסוג האוכלוסיה. ההפעלה עצמה היתה מעבר לציפיות. כל שכבות הציניות קולפו תוך זמן קצר מאוד, ההדרכה וההובלה של יאיר ואביתר הביאו את אנשי הצוות לדינמיקה חדשה ותוצאות מפתיעות יחד עם כיף וצחוקים! בעיבוד בסוף היום כולם פה אחד אמרו שהיה יום שלא יישכח ומצפים להזדמנות הבאה!</p>
+        <p class="body">חיפשנו פעילות מעניינת וחוויתית ליום גיבוש של צוות הפיתוח. מההתקשרות הראשונה עם יאיר הרגשנו בידיים טובות, החל מהבנת הצרכים והדינמיקה הייחודית בצוות ועד התאמה של הפעילות לסוג האוכלוסיה. ההפעלה עצמה היתה מעבר לציפיות. כל שכבות הציניות קולפו תוך זמן קצר מאוד, ההדרכה וההובלה של יאיר ואביתר הביאו את אנשי הצוות לדינמיקה חדשה ותוצאות מפתיעות יחד עם כיף וצחוקים! בעיבוד בסיום הפעילות כולם פה אחד אמרו שהיה יום שלא יישכח ומצפים להזדמנות הבאה!</p>
         <div class="attr">
           <div class="avatar">יה</div>
           <div class="who">
@@ -1722,7 +1863,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       <article class="quote-card" data-cat="army">
         <div class="tag tag-army">צבא</div>
         <div class="mark">”</div>
-        <p class="body">ליאיר ואביתר, צוות "בשביל הלב" היקרים, תודה מעומק הלב על הפעילות המיוחדת והמרגשת שיצרתם עבור משלחת בני ובנות המצווה ממשפחות השכול. ברגישות, מקצועיות ולב פתוח הצלחתם לחבר, לגבש ולהעניק לילדים חוויה משמעותית של תקווה, העצמה ושייכות. תודה על הדרך שאתם עושים בשביל הלב — בדיוק</p>
+        <p class="body">ליאיר ואביתר, צוות "בשביל הלב" היקרים, תודה מעומק הלב על הפעילות המיוחדת והמרגשת שיצרתם עבור משלחת בני ובנות המצווה ממשפחות השכול. ברגישות, מקצועיות ולב פתוח הצלחתם לחבר, לגבש ולהעניק לילדים חוויה משמעותית של תקווה, העצמה ושייכות. תודה על הדרך שאתם עושים בשביל הלב, בדיוק.</p>
         <div class="attr">
           <div class="avatar">אל</div>
           <div class="who">
@@ -1826,7 +1967,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   <div class="wrap">
     <div class="section-eyebrow" data-reveal>איך זה עובד</div>
     <h2 class="section-title" data-reveal>
-      מהשיחה הראשונה ועד סוף היום —<br/>
+      מהשיחה הראשונה ועד סגירת המעגל,<br/>
       אתם בידיים טובות.
     </h2>
     <p class="section-sub" data-reveal>תהליך פשוט וברור. בלי ז'רגון, בלי הפתעות.</p>
@@ -1842,13 +1983,13 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
         <div class="bullet">2</div>
         <div class="dur">אתם מאשרים לפני שיוצאים</div>
         <h3>בניית סדנה מותאמת</h3>
-        <p>בונים את היום סביב המטרות שלכם — פעילויות, הרכב מנחים, מיקום. הכל לפי המידות שלכם.</p>
+        <p>בונים את היום סביב המטרות שלכם: פעילויות, הרכב מנחים, מיקום. הכל לפי המידות שלכם.</p>
       </div>
       <div class="step" data-reveal>
         <div class="bullet">3</div>
-        <div class="dur">היום עצמו — ואחריו</div>
+        <div class="dur">היום עצמו, ואחריו</div>
         <h3>מגיעים עם כל הציוד</h3>
-        <p>אתם רק מביאים את האנשים. בסוף היום — עיבוד שמחבר את החוויה לשגרה שלכם.</p>
+        <p>אתם רק מביאים את האנשים. בסיום הפעילות מתקיים עיבוד שמחבר את החוויה לשגרה שלכם.</p>
       </div>
     </div>
   </div>
@@ -1863,7 +2004,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     <div class="faq-list">
       <details class="q" data-reveal>
         <summary>מה זה בעצם ODT?<span class="sign"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <div class="ans">ODT הוא קיצור של Outdoor Training — למידה חווייתית דרך פעילות, משחק ואתגר. בסדנאות של "בשביל הלב" החוויה היא אמצעי, לא מטרה: דרך הפעילות נוצר חיבור, עולים תהליכים, ומתקיים עיבוד שמחבר בין השטח לחיים עצמם.</div>
+        <div class="ans">ODT הוא קיצור של Outdoor Training: למידה חווייתית דרך פעילות, משחק ואתגר. בסדנאות של "בשביל הלב" החוויה היא אמצעי, לא מטרה: דרך הפעילות נוצר חיבור, עולים תהליכים, ומתקיים עיבוד שמחבר בין השטח לחיים עצמם.</div>
       </details>
       <details class="q" data-reveal>
         <summary>לאיזה גילאים הסדנאות מתאימות?<span class="sign"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -1871,15 +2012,15 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       </details>
       <details class="q" data-reveal>
         <summary>חייבים להיות "ספורטיביים" כדי להשתתף?<span class="sign"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <div class="ans">ממש לא. הפעילויות מותאמות לכל אחד ואחת. יש תנועה, אבל הדגש הוא על הביחד, על תקשורת וחוויה משותפת — לא על כושר גופני.</div>
+        <div class="ans">ממש לא. הפעילויות מותאמות לכל אחד ואחת. יש תנועה, אבל הדגש הוא על הביחד, על תקשורת וחוויה משותפת, לא על כושר גופני.</div>
       </details>
       <details class="q" data-reveal>
         <summary>לכמה משתתפים מתאימה הסדנה?<span class="sign"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <div class="ans">הסדנה מתאימה לקבוצות בין 8 ל־500 משתתפים. בפועל, הקבוצה מחולקת לתת־קבוצות של עד 25 משתתפים, כאשר לכל תת־קבוצה מוצמד מנחה לכל אורך הפעילות.</div>
+        <div class="ans">הסדנה מתאימה לקבוצות בין 8 ל-500 משתתפים. בפועל, הקבוצה מחולקת לתת־קבוצות של עד 25 משתתפים, כאשר לכל תת־קבוצה מוצמד מנחה לכל אורך הפעילות.</div>
       </details>
       <details class="q" data-reveal>
         <summary>איפה מתקיימת הפעילות?<span class="sign"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <div class="ans">אנחנו מעדיפים לקיים את הסדנאות בטבע — ביערות, שמורות טבע או אתרים ייחודיים ברחבי הארץ. עם זאת, ניתן גם לקיים את הפעילות בחלל סגור, כך שהסדנה גמישה ומתאימה לכל מקום.</div>
+        <div class="ans">אנחנו מעדיפים לקיים את הסדנאות בטבע: ביערות, שמורות טבע או אתרים ייחודיים ברחבי הארץ. עם זאת, ניתן גם לקיים את הפעילות בחלל סגור, כך שהסדנה גמישה ומתאימה לכל מקום.</div>
       </details>
       <details class="q" data-reveal>
         <summary>מי מעביר את הסדנה?<span class="sign"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -1892,23 +2033,20 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 <!-- CLIENTS -->
 <section class="clients">
   <div class="wrap">
-    <div class="clients-head"><span>עבדנו עם</span></div>
-    <div class="clients-row">
-      <img src="assets/clients/amana.webp" alt="אולפנת אמנה">
-      <img src="assets/clients/bnei-akiva.webp" alt="בני עקיבא">
-      <img src="assets/clients/carmeli.webp" alt="כרמלי">
-      <img src="assets/clients/duvdevan.webp" alt="דובדבן">
-      <img src="assets/clients/eshkol.webp" alt="אשכול">
-      <img src="assets/clients/ezra.webp" alt="עזרא">
-      <img src="assets/clients/fidf.webp" alt="FIDF">
-      <img src="assets/clients/hashomer.webp" alt="השומר">
-      <img src="assets/clients/matnas-etzion.webp" alt="מתנ״ס עציון">
-      <img src="assets/clients/mimeni.webp" alt="ממני">
-      <img src="assets/clients/neve-dekalim.webp" alt="נוה דקלים">
-      <img src="assets/clients/noam-tzvia.webp" alt="רשת נועם צביה">
-      <img src="assets/clients/ort-arad.webp" alt="אורט ערד">
-      <img src="assets/clients/shaare-zedek.webp" alt="שערי צדק">
-      <img src="assets/clients/yatka.webp" alt="יתקה">
+    <div class="clients-head"><span>מה מספרים עלינו</span></div>
+    <div class="clients-row" aria-label="תמונות מהשטח">
+      <div class="clients-photo"><img src="assets/team-archery.jpeg" alt="פעילות עם קבוצה בשטח"></div>
+      <div class="clients-photo"><img src="assets/army-circle.jpeg" alt="פעילות גיבוש בשטח"></div>
+      <div class="clients-photo"><img src="assets/girls-bridge.jpeg" alt="פעילות חינוך בשטח"></div>
+      <div class="clients-photo"><img src="assets/circle-hug.jpeg" alt="חיבור וגיבוש קבוצתי"></div>
+      <div class="clients-photo"><img src="assets/kid-archery.jpeg" alt="פעילות אתגרית לילדים ונוער"></div>
+      <div class="clients-photo"><img src="assets/adults-sticks.jpeg" alt="פעילות קבוצתית"></div>
+      <div class="clients-photo"><img src="assets/forest-walk.jpeg" alt="פעילות בטבע"></div>
+      <div class="clients-photo"><img src="assets/numbers-grass.jpeg" alt="משחקי שטח"></div>
+      <div class="clients-photo"><img src="assets/archery-shoot.jpeg" alt="קשתות ואתגר"></div>
+      <div class="clients-photo"><img src="assets/chair-rope.jpeg" alt="אתגר משותף"></div>
+      <div class="clients-photo"><img src="assets/kids-rope.jpeg" alt="פעילות למשפחות ולילדים"></div>
+      <div class="clients-photo"><img src="assets/instructor-running.jpeg" alt="מנחה בשטח"></div>
     </div>
   </div>
 </section>
@@ -1924,7 +2062,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
         פנו אלינו בוואטסאפ
       </a>
     </div>
-    <div class="mini" data-reveal>עונים בדרך כלל תוך שעה · ימי חול 9:00–19:00</div>
+    <div class="mini" data-reveal>עונים בדרך כלל תוך שעה · ימי חול 9:00 עד 19:00</div>
   </div>
 </section>
 
@@ -1934,12 +2072,12 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     <div class="foot-grid">
       <div class="foot-logo">
         <img src="assets/logo-white.webp" alt="בשביל הלב">
-        <p class="foot-tag">סדנאות ODT חווייתיות לארגונים, צה"ל, בתי ספר ומשפחות — בכל הארץ.</p>
+        <p class="foot-tag">סדנאות ODT חווייתיות לארגונים, צה"ל, בתי ספר ומשפחות בכל הארץ.</p>
       </div>
       <div class="foot-col">
         <h4>יצירת קשר</h4>
-        <a href="tel:+972528990156">יאיר — 052-8990156</a>
-        <a href="tel:+972542225497">אביתר — 054-2225497</a>
+        <a href="tel:+972528990156">יאיר · 052-8990156</a>
+        <a href="tel:+972542225497">אביתר · 054-2225497</a>
         <a href="https://wa.me/972528990156" target="_blank">וואטסאפ</a>
       </div>
       <div class="foot-col">
@@ -2088,7 +2226,8 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
     return m ? m[1] : null;
   }
-  function buildVideoEl(url){
+  function buildVideoEl(url, opts){
+    opts = opts || {};
     const yt = youTubeId(url);
     if (yt){
       const f = document.createElement('iframe');
@@ -2112,12 +2251,28 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     v.controls = true;
     v.autoplay = true;
     v.playsInline = true;
+    v.setAttribute('playsinline','');
+    if (opts.muted){
+      v.muted = true;
+      v.defaultMuted = true;
+    }
     return v;
   }
+
+  function syncMuteUi(btn, video){
+    if (!btn || !video || btn.tagName !== 'BUTTON') return;
+    const muted = video.muted;
+    const mIco = btn.querySelector('.ico-muted');
+    const uIco = btn.querySelector('.ico-unmuted');
+    if (mIco) mIco.style.display = muted ? 'block' : 'none';
+    if (uIco) uIco.style.display = muted ? 'none' : 'block';
+    btn.setAttribute('aria-label', muted ? 'הפעילו קול' : 'כבו קול');
+    btn.setAttribute('aria-pressed', muted ? 'false' : 'true');
+  }
+
   function activateVideo(card){
     const url = card.dataset.video && card.dataset.video.trim();
     if (!url){
-      // No video URL set yet: show a friendly placeholder
       if (card.querySelector('.v-placeholder')) return;
       const ph = document.createElement('div');
       ph.className = 'v-placeholder';
@@ -2126,12 +2281,44 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       card.appendChild(ph);
       return;
     }
+    const existing = card.querySelector(':scope > video, :scope > iframe');
+    if (existing){
+      if (existing.tagName === 'VIDEO'){
+        if (existing.paused) existing.play().catch(()=>{});
+        else existing.pause();
+      }
+      return;
+    }
     card.classList.add('is-playing');
-    const el = buildVideoEl(url);
+    const isVcard = card.classList.contains('vcard');
+    const el = buildVideoEl(url, { muted: isVcard });
     card.appendChild(el);
+    if (el.tagName === 'VIDEO'){
+      el.play().catch(()=>{});
+      el.addEventListener('click', (ev)=>{ ev.stopPropagation(); });
+      const muteBtn = card.closest('.vtest-item')?.querySelector('.vcard-mute');
+      syncMuteUi(muteBtn, el);
+      el.addEventListener('volumechange', ()=> syncMuteUi(muteBtn, el));
+    }
   }
+
   document.querySelectorAll('.vcard, .video-feature').forEach(card=>{
-    card.addEventListener('click', ()=> activateVideo(card));
+    card.addEventListener('click', (e)=>{
+      if (e.target.closest('video') || e.target.closest('iframe')) return;
+      activateVideo(card);
+    });
+  });
+
+  document.querySelectorAll('.vcard-mute').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const vcard = btn.closest('.vtest-item')?.querySelector('.vcard');
+      const vid = vcard?.querySelector(':scope > video');
+      if (!vid) return;
+      vid.muted = !vid.muted;
+      syncMuteUi(btn, vid);
+      vid.play().catch(()=>{});
+    });
   });
 </script>
 
