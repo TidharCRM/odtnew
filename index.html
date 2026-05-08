@@ -1585,7 +1585,6 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   <div class="wrap">
     <div class="section-eyebrow" data-reveal>טעימה מהשטח</div>
     <h2 class="section-title" data-reveal>וככה זה נראה!!</h2>
-    <p class="section-sub" data-reveal>מהשטח, בלי בימוי.</p>
 
     <div class="video-feature" id="brandVideo" data-reveal data-video="assets/videos/brand.mp4" data-poster="assets/instructor-running.jpeg">
       <img src="assets/instructor-running.jpeg" alt="סרטון תדמית · בשביל הלב">
@@ -1608,8 +1607,6 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       <div class="shot"><img src="assets/forest-walk.jpeg" alt=""></div>
       <div class="shot"><img src="assets/kid-archery.jpeg" alt=""></div>
       <div class="shot"><img src="assets/chair-rope.jpeg" alt=""></div>
-      <div class="shot"><img src="assets/archery-targets.jpeg" alt=""></div>
-      <div class="shot"><img src="assets/archery-shoot.jpeg" alt=""></div>
       <div class="shot"><img src="assets/numbers-grass.jpeg" alt=""></div>
       <div class="shot"><img src="assets/adults-sticks.jpeg" alt=""></div>
     </div>
@@ -2040,7 +2037,6 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       <div class="clients-photo"><img src="assets/adults-sticks.jpeg" alt="פעילות קבוצתית"></div>
       <div class="clients-photo"><img src="assets/forest-walk.jpeg" alt="פעילות בטבע"></div>
       <div class="clients-photo"><img src="assets/numbers-grass.jpeg" alt="משחקי שטח"></div>
-      <div class="clients-photo"><img src="assets/archery-shoot.jpeg" alt="קשתות ואתגר"></div>
       <div class="clients-photo"><img src="assets/chair-rope.jpeg" alt="אתגר משותף"></div>
       <div class="clients-photo"><img src="assets/kids-rope.jpeg" alt="פעילות למשפחות ולילדים"></div>
       <div class="clients-photo"><img src="assets/instructor-running.jpeg" alt="מנחה בשטח"></div>
@@ -2122,10 +2118,10 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   window.addEventListener('scroll', onScroll, { passive:true });
 
   // גלריית השטח: להוריד אריחים שהם רק לוגו של המותג (לא צילום מהפעילות)
-  const stripBrandRe = /logo-white\.webp|logo-dark\.webp/i;
+  const stripBrandRe = /\/logo[-_].+\.(webp|jpe?g|png|svg)/i;
   document.querySelectorAll('#field .strip .shot').forEach((shot)=>{
     const img = shot.querySelector('img[src]');
-    if (!img) return;
+    if (!img) { return; }
     if (stripBrandRe.test(img.getAttribute('src') || '')) shot.remove();
   });
 
