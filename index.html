@@ -2124,6 +2124,14 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   onScroll();
   window.addEventListener('scroll', onScroll, { passive:true });
 
+  // גלריית השטח: להוריד אריחים שהם רק לוגו של המותג (לא צילום מהפעילות)
+  const stripBrandRe = /logo-white\.webp|logo-dark\.webp/i;
+  document.querySelectorAll('#field .strip .shot').forEach((shot)=>{
+    const img = shot.querySelector('img[src]');
+    if (!img) return;
+    if (stripBrandRe.test(img.getAttribute('src') || '')) shot.remove();
+  });
+
   const io = new IntersectionObserver((entries)=>{
     for(const e of entries){
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
