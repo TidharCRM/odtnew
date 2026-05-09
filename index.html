@@ -1,23 +1,24 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>בשביל הלב · סדנאות ODT | חוויה. תנועה. חיבור.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
-  @font-face{ font-family:'FUP Begin'; src:url('assets/fonts/begin-medium.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap;}
-  @font-face{ font-family:'FUP Begin'; src:url('assets/fonts/begin-semibold.woff2') format('woff2'); font-weight:600; font-style:normal; font-display:swap;}
-  @font-face{ font-family:'FUP Begin'; src:url('assets/fonts/begin-bold.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap;}
-  @font-face{ font-family:'FUP Begin'; src:url('assets/fonts/begin-extrabold.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap;}
+  /* ===== Local Hebrew typefaces: Tzalmon (display) + Tzofia (text) ===== */
+  @font-face{ font-family:'Tzalmon'; src:url('assets/fonts/tzalmon-light.woff2') format('woff2');     font-weight:300; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzalmon'; src:url('assets/fonts/tzalmon-regular.woff2') format('woff2');   font-weight:400; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzalmon'; src:url('assets/fonts/tzalmon-medium.woff2') format('woff2');    font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzalmon'; src:url('assets/fonts/tzalmon-semibold.woff2') format('woff2');  font-weight:600; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzalmon'; src:url('assets/fonts/tzalmon-bold.woff2') format('woff2');      font-weight:700; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzalmon'; src:url('assets/fonts/tzalmon-extrabold.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
 
-  @font-face{ font-family:'FUP Gilad'; src:url('assets/fonts/gilad-light.woff2') format('woff2'); font-weight:300; font-style:normal; font-display:swap;}
-  @font-face{ font-family:'FUP Gilad'; src:url('assets/fonts/gilad-regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap;}
-  @font-face{ font-family:'FUP Gilad'; src:url('assets/fonts/gilad-medium.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap;}
-  @font-face{ font-family:'FUP Gilad'; src:url('assets/fonts/gilad-semibold.woff2') format('woff2'); font-weight:600; font-style:normal; font-display:swap;}
-  @font-face{ font-family:'FUP Gilad'; src:url('assets/fonts/gilad-bold.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap;}
+  @font-face{ font-family:'Tzofia';  src:url('assets/fonts/tzofia-light.woff2') format('woff2');     font-weight:300; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzofia';  src:url('assets/fonts/tzofia-regular.woff2') format('woff2');   font-weight:400; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzofia';  src:url('assets/fonts/tzofia-medium.woff2') format('woff2');    font-weight:500; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzofia';  src:url('assets/fonts/tzofia-semibold.woff2') format('woff2');  font-weight:600; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzofia';  src:url('assets/fonts/tzofia-bold.woff2') format('woff2');      font-weight:700; font-style:normal; font-display:swap; }
+  @font-face{ font-family:'Tzofia';  src:url('assets/fonts/tzofia-extrabold.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
 </style>
 
 <script>
@@ -47,7 +48,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   html,body{ margin:0; padding:0; }
   html{ overflow-x: clip; }
   body{
-    font-family:'FUP Gilad', 'Assistant', system-ui, sans-serif;
+    font-family:'Tzofia', system-ui, sans-serif;
     background:var(--paper);
     color:var(--ink);
     font-size:17px;
@@ -61,7 +62,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   main{ overflow-x: clip; }
   section{ contain: paint; }
   h1,h2,h3,h4{
-    font-family:'FUP Begin', 'Rubik', sans-serif;
+    font-family:'Tzalmon', 'Times New Roman', serif;
     font-weight:800;
     letter-spacing:-0.02em;
     line-height:1.1;
@@ -101,8 +102,8 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     box-shadow: 0 1px 0 var(--rule);
     padding-block: 10px;
   }
-  .nav-logo{ display:flex; align-items:center; gap:10px; font-family:'FUP Begin','Rubik',sans-serif; font-weight:800; }
-  .nav-logo img{ height:44px; width:auto; }
+  .nav-logo{ display:flex; align-items:center; gap:10px; font-family:'Tzalmon','Times New Roman',serif; font-weight:800; }
+  .nav-logo img{ height:60px; width:auto; }
   .nav-logo .tag{ font-size:11px; letter-spacing:.24em; color:var(--terra); font-weight:600; display:block; }
   .nav-logo .name{ font-size:18px; color:var(--ink); display:block; line-height:1;}
   .nav-links{ display:flex; gap:28px; align-items:center; font-size:15px; font-weight:500; }
@@ -141,14 +142,20 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     .hero{ padding: 92px 0 60px; min-height:auto; display:block; }
     .hero-inner{ grid-template-columns:1fr; text-align:center; width: min(1200px, 92vw); }
     .hero-inner > div:first-child{ display:flex; flex-direction:column; align-items:center; }
-    .hero-logo{ display:block; margin-bottom: 18px; }
+    .hero-logo{ display:none; }
     .hero .eyebrow{ justify-content:center; margin-bottom: 16px; font-size:12px; }
     .hero h1{ font-size: clamp(34px, 9vw, 52px); max-width: 14ch; }
     .hero .lede{ max-width: 40ch; }
     .hero .trust{ justify-content:center; gap: 10px 20px; font-size:13px; }
     .hero .cta-row{ justify-content:center; }
-    /* Hide hero collage on mobile — big logo serves as the visual anchor and the photos repeat in #field anyway. */
-    .hero-collage{ display:none; }
+    /* Mobile collage — sized so it fits within the viewport and sits above the text block. */
+    .hero-inner{ display:flex; flex-direction:column; }
+    .hero-collage{
+      order:-1;
+      width: min(420px, 88vw);
+      margin: 0 auto 28px;
+      max-height:none;
+    }
     .section-eyebrow, .section-title, .section-sub{ text-align:center; }
     .section-eyebrow{ justify-content:center; }
     .section-title{ margin-inline:auto; }
@@ -206,7 +213,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     display:inline-block;
     position:relative;
     color:var(--terra);
-    font-family:'Caveat', cursive;
+    font-family:'Tzalmon', cursive;
     font-weight:700;
     font-size:1.1em;
     line-height:.8;
@@ -293,7 +300,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     color:var(--paper);
     border-radius:999px;
     padding: 14px 20px;
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-weight:700;
     font-size:13px;
     display:flex; flex-direction:column; align-items:center; line-height:1;
@@ -342,7 +349,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   /* ---------- MANIFESTO / WHAT ---------- */
   .manifesto{ background: var(--cream); }
   .manifesto .lead{
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-size: clamp(22px, 2.3vw, 32px);
     line-height:1.3;
     color:var(--ink);
@@ -382,7 +389,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     box-shadow: 0 20px 40px -20px rgba(42,27,18,.2);
   }
   .pillar .num{
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-size:14px;
     color:var(--terra);
     font-weight:700;
@@ -440,7 +447,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   }
   .about-founders-caption{
     margin: 16px 0 0;
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-weight:700;
     font-size: 14px;
     letter-spacing:.04em;
@@ -451,7 +458,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     .about-founders-caption{ margin-top: 12px; }
   }
   .about-text .lead-line{
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-size: clamp(22px, 2.4vw, 30px);
     line-height:1.3;
     font-weight:600;
@@ -460,7 +467,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   }
   .about-text .lead-line em{
     font-style:normal; color: var(--terra);
-    font-family:'Caveat',cursive;
+    font-family:'Tzalmon',cursive;
     font-weight:700;
     font-size:1.15em;
   }
@@ -475,7 +482,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   .signature{
     margin-top: 26px;
     display:flex; align-items:center; gap: 16px;
-    font-family:'Caveat', cursive;
+    font-family:'Tzalmon', cursive;
     font-size: 30px;
     color: var(--terra);
     line-height:1;
@@ -517,7 +524,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     padding-inline: 2px;
   }
   .vtest-caption-text .vname{
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-weight:700;
     font-size: 15px;
     color: var(--ink);
@@ -729,7 +736,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   .video-feature:hover .play-btn{ transform: scale(1.1); }
   .video-feature .play-btn svg{ margin-right:-4px; }
   .video-feature .play span{
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-weight:600;
     font-size:15px;
     letter-spacing:.15em;
@@ -766,7 +773,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     color:var(--ink-2);
     padding:10px 18px;
     border-radius:999px;
-    font-family:'FUP Gilad','Assistant',sans-serif;
+    font-family:'Tzofia',sans-serif;
     font-size:14px;
     font-weight:600;
     cursor:pointer;
@@ -806,7 +813,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     box-shadow: 0 24px 48px -24px rgba(42,27,18,.25);
   }
   .quote-card .mark{
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-size:60px;
     line-height:.6;
     color: var(--terra);
@@ -831,7 +838,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     background: var(--terra);
     color:#fff;
     display:flex; align-items:center; justify-content:center;
-    font-family:'FUP Begin','Rubik',sans-serif; font-weight:700;
+    font-family:'Tzalmon','Times New Roman',serif; font-weight:700;
     font-size:15px;
     flex-shrink:0;
   }
@@ -887,7 +894,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     color:#fff;
     border-radius:50%;
     display:flex; align-items:center; justify-content:center;
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-size:24px;
     font-weight:800;
     box-shadow: 0 10px 24px -8px rgba(158,78,44,.5);
@@ -915,7 +922,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     cursor:pointer;
     display:flex; align-items:center; justify-content:space-between;
     gap:20px;
-    font-family:'FUP Begin','Rubik',sans-serif;
+    font-family:'Tzalmon','Times New Roman',serif;
     font-weight:600;
     font-size: clamp(17px, 1.6vw, 20px);
     color:var(--ink);
@@ -1005,7 +1012,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     max-width: 18ch;
     margin: 0 auto 24px;
   }
-  .final-cta h2 em{ font-style:normal; color:var(--gold); font-family:'Caveat',cursive; font-weight:700; font-size:1.1em;}
+  .final-cta h2 em{ font-style:normal; color:var(--gold); font-family:'Tzalmon',cursive; font-weight:700; font-size:1.1em;}
   .final-cta p{
     font-size: 19px;
     color: rgba(245,237,225,.78);
@@ -1105,11 +1112,11 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     width:260px;
     box-shadow: 0 30px 60px -20px rgba(0,0,0,.5);
     display:none;
-    font-family:'FUP Gilad','Assistant',sans-serif;
+    font-family:'Tzofia',sans-serif;
   }
   #tweaks.open{ display:block; }
   #tweaks h5{
-    margin:0 0 14px; font-family:'FUP Begin','Rubik',sans-serif;
+    margin:0 0 14px; font-family:'Tzalmon','Times New Roman',serif;
     font-size:13px; letter-spacing:.2em;
     color:var(--gold); text-transform:uppercase;
   }
@@ -1388,6 +1395,55 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 </head>
 <body data-accent="terracotta" data-hero="photo-full">
 
+<!-- LOADING SCREEN -->
+<style>
+  #loader{
+    position:fixed; inset:0;
+    z-index:9999;
+    display:flex; align-items:center; justify-content:center;
+    background:#F5EDE1;
+    transition: opacity .55s ease, visibility .55s ease;
+  }
+  #loader::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0 0.1  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity:.5;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  #loader img{
+    height: clamp(110px, 18vw, 180px);
+    width:auto;
+    animation: loaderPulse 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 6px 18px rgba(42,27,18,.12));
+  }
+  @keyframes loaderPulse{
+    0%,100%{ transform: scale(1); opacity:.85; }
+    50%   { transform: scale(1.05); opacity:1; }
+  }
+  #loader.hidden{ opacity:0; visibility:hidden; }
+  html.loading, html.loading body{ overflow:hidden; }
+  @media (prefers-reduced-motion: reduce){
+    #loader img{ animation:none; }
+  }
+</style>
+<div id="loader" aria-hidden="true">
+  <img src="assets/logo-dark.webp" alt="">
+</div>
+<script>
+  document.documentElement.classList.add('loading');
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      var l = document.getElementById('loader');
+      if(!l) return;
+      l.classList.add('hidden');
+      document.documentElement.classList.remove('loading');
+      setTimeout(function(){ l.remove(); }, 700);
+    }, 1000);
+  });
+</script>
+
 <!-- NAV -->
 <nav class="topnav" id="topnav">
   <a href="#top" class="nav-logo">
@@ -1424,12 +1480,12 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       <img class="hero-logo" src="assets/logo-dark.webp" alt="בשביל הלב" data-reveal>
       <div class="eyebrow" data-reveal>סדנאות ODT · בשביל הלב</div>
       <h1 data-reveal>
-        לא עוד יום גיבוש<br/>
-        ששוכחים ממנו<br/>
-        <span class="scribble">בסוף השבוע.</span>
+        הרבה מעבר לפעילות<br/>
+        חוויה משמעותית<br/>
+        <span class="scribble">שנשארת עם הקבוצה.</span>
       </h1>
       <p class="lede" data-reveal>
-        סדנאות ODT שמחברות את הצוות שלכם דרך חוויה, לא דרך הרצאה.
+        סדנאות ODT שמחברות את הקבוצה שלכם דרך חוויה, לא דרך הרצאה.
         מותאם אישית לדינמיקה של הקבוצה שלכם, מ-8 עד 500 משתתפים, בטבע או בחלל סגור.
       </p>
       <div class="trust" data-reveal>
@@ -1451,7 +1507,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     </div>
 
     <div class="hero-collage" data-reveal>
-      <div class="frame hc-main"><img src="assets/adults-sticks.jpeg" alt=""></div>
+      <div class="frame hc-main"><img src="assets/hero.jpeg" alt=""></div>
       <div class="frame hc-acc1"><img src="assets/hero-hoop.jpeg" alt=""></div>
       <div class="frame hc-acc2"><img src="assets/numbers-grass.jpeg" alt=""></div>
       <div class="sticker"><b data-count="500" data-suffix="+">0+</b><em>קבוצות</em></div>
@@ -1577,6 +1633,167 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     <p class="audience-note" data-reveal>
       פעילות <b>מ-8 ועד 500 משתתפים</b> · כל תת־קבוצה של עד 25 מקבלת מנחה צמוד
     </p>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes" id="words">
+  <div class="wrap">
+    <div class="section-eyebrow" data-reveal>המלצות</div>
+    <h2 class="section-title" data-reveal>
+      מה אומרים עלינו
+    </h2>
+
+    <p class="section-sub" data-reveal>גלילה ימינה ושמאלה בין ההמלצות.</p>
+
+    <div class="quotes-filter" data-reveal>
+      <button class="qfilter active" data-filter="all">הכל</button>
+      <button class="qfilter" data-filter="army">צבא וביטחון</button>
+      <button class="qfilter" data-filter="edu">חינוך ונוער</button>
+      <button class="qfilter" data-filter="corp">ארגונים וחינוך</button>
+      <button class="qfilter" data-filter="fam">משפחות</button>
+    </div>
+
+    <div class="quotes-grid" id="quotesGrid">
+
+      <article class="quote-card" data-cat="edu">
+        <div class="tag tag-edu">חינוך</div>
+        <div class="mark">”</div>
+        <p class="body">יאיר!! וואו מה שעשיתם לסמינריון שלנו!<br><br>אתם פשוט הכי טובים שיש!<br><br>הפידבקים החיוביים הגיעו כל הזמן.<br><br>יצא לי לראות לא מעט פעילויות כאלה ובאמת הייתם ברמה גבוהה מאוד, הבאתם משהו אחר.<br><br>הצוות שלכם הצליח ממש להביא את החבר'ה, להכניס אותם, לדבר אליהם. פשוט פלא.<br><br>תודה רבה רבה!!</p>
+        <div class="attr">
+          <div class="avatar">אמ</div>
+          <div class="who">
+            <div class="name">אפרת מלאכי</div>
+            <div class="role">רכזת הדרכה במחוז דן</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="edu">
+        <div class="tag tag-edu">חינוך</div>
+        <div class="mark">”</div>
+        <p class="body">יאיר נשמה!!!<br>הגענו לסדנה שלך אחרי יום שהתחיל במבחן ארוך, ואז הליכה ארוכה, ושמש, וחם, ולמי יש כח עכשיו לסדנת odt, כזאת שכבר עשינו כמה פעמים...<br>קמנו רק כי לא היה לנו נעים לסרב.<br>ואז<br>וואו!!!<br>איזה קסם!!!<br>תוך שניות נדבקנו בהתלהבות שלך, לא שמנו לב שחם, שהשמש מסנוורת, התלהבנו מהמשימות כאילו זו פעם ראשונה שביקשו מאיתנו לעשות אותן. מדהים איך ההנחיה המקצועית שלך, ההתלהבות ותשומת הלב הפכו odt שגרתי לחוויה מלהיבה וחדשה!<br>לא רצינו להפסיק...<br>הצלחת להדליק את כל הקבוצה, לפרגן, להאיר את תשומת הלב למה שקורה בינינו ולהוריד כמה וכמה מחסומים.<br>היה קצר אבל כל כך כיף ומחבר!!<br>אין כמוך, תודה רבה</p>
+        <div class="attr">
+          <div class="avatar">יע</div>
+          <div class="who">
+            <div class="name">יעל</div>
+            <div class="role">מחנכת</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="corp">
+        <div class="tag tag-corp">הייטק</div>
+        <div class="mark">”</div>
+        <p class="body">חיפשנו פעילות מעניינת וחוויתית ליום גיבוש של צוות הפיתוח. מההתקשרות הראשונה עם יאיר הרגשנו בידיים טובות, החל מהבנת הצרכים והדינמיקה הייחודית בצוות ועד התאמה של הפעילות לסוג האוכלוסיה. ההפעלה עצמה היתה מעבר לציפיות. כל שכבות הציניות קולפו תוך זמן קצר מאוד, ההדרכה וההובלה של יאיר ואביתר הביאו את אנשי הצוות לדינמיקה חדשה ותוצאות מפתיעות יחד עם כיף וצחוקים! בעיבוד בסיום הפעילות כולם פה אחד אמרו שהיה יום שלא יישכח ומצפים להזדמנות הבאה!</p>
+        <div class="attr">
+          <div class="avatar">יה</div>
+          <div class="who">
+            <div class="name">יהושע</div>
+            <div class="role">עובד בתעשייה ביטחונית</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="army">
+        <div class="tag tag-army">צבא</div>
+        <div class="mark">”</div>
+        <p class="body">ליאיר ואביתר, צוות "בשביל הלב" היקרים, תודה מעומק הלב על הפעילות המיוחדת והמרגשת שיצרתם עבור משלחת בני ובנות המצווה ממשפחות השכול. ברגישות, מקצועיות ולב פתוח הצלחתם לחבר, לגבש ולהעניק לילדים חוויה משמעותית של תקווה, העצמה ושייכות. תודה על הדרך שאתם עושים בשביל הלב, בדיוק.</p>
+        <div class="attr">
+          <div class="avatar">אל</div>
+          <div class="who">
+            <div class="name">אסף לוי</div>
+            <div class="role">סא"ל מיל', מפקד משלחת LEGACY</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="army">
+        <div class="tag tag-army">צבא</div>
+        <div class="mark">”</div>
+        <p class="body">הכרתי את יאיר בפעילות חברתית מגבשת של משפחות האחים השכולים מהר מאוד התאהבתי בבן אדם ובאופטימיות שהוא מעביר תוך כדי, התשוקה האנרגיות והמסרים המחזקים שהוא מעביר במשך הפעילות גרמו לי להבין שעומד מולי אדם שאוהב לעשות את מה שהוא עושה יותר נכון "מצא את ייעודו" מיד בסיום הפעילות ניגשתי אליו ואמרתי לו בחיוך רחב "אתה אדם השראה אדם שחוזר הביתה בחיוך כי אתה מצאת את הטוב שבך והתחלת לעסוק בו ולפזר אותו לאחרים בין אם זה לאנשים 'רגילים' או למשפחות שכולות אתה אדם שיודע את הדרך והגישה ללב האדם תוך כדי פעילות אני מעריץ אותך המון ומקווה שרק תמשיך ככה" סיימנו בחיבוק חזק ואמרתי לעצמי איזה אנשים מדהימים יש לנו במדינה תודה על הזכות</p>
+        <div class="attr">
+          <div class="avatar">אד</div>
+          <div class="who">
+            <div class="name">אהרון דנינו</div>
+            <div class="role">אחיו של אורי דנינו ז"ל אשר נחטף ונרצח בשבי החמאס</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="edu">
+        <div class="tag tag-edu">חינוך</div>
+        <div class="mark">”</div>
+        <p class="body">תודה לה' שבחרנו באביתר ובשאר הצוות המדהים של "בשביל הלב" להעביר לנו ODT והיה מדהים מדהים מדהים! החבר'ה היו שותפים גם בנוכחות וגם בפעילויות עצמן, שכבר זה הישג גדול אצלנו. המחנכים עברו תהליך חיבור משמעותי אל הכיתה וכל האווירה הייתה חמה מקצועית וטובה. המדריכים תותחים, הפעילויות מעולות, וכל מה שנותר לומר זה רק תודה ושתצליחו בגדול</p>
+        <div class="attr">
+          <div class="avatar">בה</div>
+          <div class="who">
+            <div class="name">צוות חינוכי</div>
+            <div class="role">אחרי סדנת ODT לכיתה</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="army">
+        <div class="tag tag-army">צבא</div>
+        <div class="mark">”</div>
+        <p class="body">עברתי היום סדנא של "בשביל הלב" לקראת התחלת תפקידי כמפקצית בבה"ד 1.<br><br>חשוב לי לפרגן מכל הלב, ולהגיד שהאנשים שם ממש מעולים ונעימים. יודעים איך לקחת קבוצה ולהוציא ממנה את המיטב, בצורה הכי מהנה.<br><br>הפעילויות מגבשות, מהנות, ומחזירות אותנו למקום יותר משוחרר וקליל.<br><br>חווינו עבודה בצוות, שיתוף פעולה, היכרות מעמיקה והמון צחוק.<br><br>ממליצה בחום, אנשים שבאים לתת מכל הלב.</p>
+        <div class="attr">
+          <div class="avatar">מפ</div>
+          <div class="who">
+            <div class="name">מפקצית</div>
+            <div class="role">בה"ד 1</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="edu">
+        <div class="tag tag-edu">חינוך</div>
+        <div class="mark">”</div>
+        <p class="body">ההבדל בין מדריך טוב למדריך פצצה זה אתה יאיר!<br><br>ההצלחה והשיתוף פעולה של הקבוצה היתה המראה לאנרגיות שהבאת! הפרגון שהרים אותן והניע להגיע להישגים גבוהים יותר... תשומת הלב האישית לבנות, בשם, בקריאה, בזיהוי נקודות החוזק, בפרגון אישי וחלוקת תפקידים... גרם להן להתגייס ולצלוח בהנאה את המשימות.<br><br>המשימות היו מאתגרות אבל גם ממש כיפיות ועם המון סיפוק!<br><br>פעילות מוצלחת ממש עם מדריך תותח! תודה רבה!</p>
+        <div class="attr">
+          <div class="avatar">רכ</div>
+          <div class="who">
+            <div class="name">רכזת קבוצה</div>
+            <div class="role">סדנת בנות</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="fam">
+        <div class="tag tag-fam">משפחות</div>
+        <div class="mark">”</div>
+        <p class="body">חגגנו יום הולדת תשעים לאמא שלי, והזמנו פעילות לכל המשפחה מחברת "בשביל הלב". הייתי מאד סקפטי אם ניתן לעשות פעילות שתצליח לכלול את כולם, מילדים קטנים עד אמא בת התשעים. בנוסף, אני בדרך כלל לא "מתחבר" לפעילויות של משחקי חברה וספורט וכד'.<br><br>להפתעתי ולשמחתי, הפעילות היתה נהדרת, מרתקת, מחברת וכיפית, והיא אכן הצליחה לכלול את כולם חוץ מהתינוקות (שארגנו להם פעילות מתאימה). ואפילו אני ה"כבד" מאד נהינתי. מנחה הקבוצה היה יאיר בלוך, והוא הוביל את הקבוצה בטוב טעם ובמקצועיות. מומלץ ביותר!</p>
+        <div class="attr">
+          <div class="avatar">חי</div>
+          <div class="who">
+            <div class="name">חיים</div>
+            <div class="role">יום הולדת 90 לאמא</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote-card" data-cat="edu">
+        <div class="tag tag-edu">חינוך</div>
+        <div class="mark">”</div>
+        <p class="body">רק באמת להגיד כמה היו לפעילות את כל התנאים לכישלון.<br><br>פעילות חוץ, חום ולחות מוגזמים, חבר'ה בגיל שמחפש את מה "שמגניב" ולא תמיד מצליח להחזיק את הערך בדברים..<br><br>ותקשיבו, שהייתם פשוט מדוייקים!<br><br>החבר'ה עפו באוויר, עפו על הצוות שלכם (שלא פגשתי אישית, אבל שמעתי מהחבר'ה כמה הם היו נגישים, דיברו ללב שלהם וידעו להפעיל מהמקומות הנכונים והאמיתיים. שזה כל כך קשה וכל כך מוערך!) עפו על הפעילות! הם אשכרה עצרו אותנו בשבילים כדי להגיד כמה היה מטורף ומשמעותי!!<br><br>תודה ענקית לכם!!! מעריכים ברמות!<br><br>תמשיכו לעשות טוב ולהוסיף כזה אור!</p>
+        <div class="attr">
+          <div class="avatar">על</div>
+          <div class="who">
+            <div class="name">עתרת לנקרי</div>
+            <div class="role">רכזת סמינריון הדרכה בנ"ע צפון</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="margin-top:56px; text-align:center;" data-reveal>
+      <a href="https://wa.me/972528990156?text=שלום,%20רוצה%20לראות%20עוד%20דוגמאות%20מתאימות%20לקבוצה%20שלי" target="_blank" class="btn-ghost" style="display:inline-flex">
+        רוצים לראות דוגמאות מותאמות לקבוצה שלכם?
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1794,168 +2011,6 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   </div>
 </section>
 
-<!-- QUOTES -->
-<section class="quotes" id="words">
-  <div class="wrap">
-    <div class="section-eyebrow" data-reveal>המלצות</div>
-    <h2 class="section-title" data-reveal>
-      מה אומרים עלינו אחרי<br/>
-      שהלב שלהם כבר מלא.
-    </h2>
-
-    <p class="section-sub" data-reveal>גלילה ימינה ושמאלה בין ההמלצות.</p>
-
-    <div class="quotes-filter" data-reveal>
-      <button class="qfilter active" data-filter="all">הכל</button>
-      <button class="qfilter" data-filter="army">צבא וביטחון</button>
-      <button class="qfilter" data-filter="edu">חינוך ונוער</button>
-      <button class="qfilter" data-filter="corp">ארגונים וחינוך</button>
-      <button class="qfilter" data-filter="fam">משפחות</button>
-    </div>
-
-    <div class="quotes-grid" id="quotesGrid">
-
-      <article class="quote-card" data-cat="edu">
-        <div class="tag tag-edu">חינוך</div>
-        <div class="mark">”</div>
-        <p class="body">יאיר!! וואו מה שעשיתם לסמינריון שלנו!<br><br>אתם פשוט הכי טובים שיש!<br><br>הפידבקים החיוביים הגיעו כל הזמן.<br><br>יצא לי לראות לא מעט פעילויות כאלה ובאמת הייתם ברמה גבוהה מאוד, הבאתם משהו אחר.<br><br>הצוות שלכם הצליח ממש להביא את החבר'ה, להכניס אותם, לדבר אליהם. פשוט פלא.<br><br>תודה רבה רבה!!</p>
-        <div class="attr">
-          <div class="avatar">אמ</div>
-          <div class="who">
-            <div class="name">אפרת מלאכי</div>
-            <div class="role">רכזת הדרכה במחוז דן</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="edu">
-        <div class="tag tag-edu">חינוך</div>
-        <div class="mark">”</div>
-        <p class="body">יאיר נשמה!!!<br>הגענו לסדנה שלך אחרי יום שהתחיל במבחן ארוך, ואז הליכה ארוכה, ושמש, וחם, ולמי יש כח עכשיו לסדנת odt, כזאת שכבר עשינו כמה פעמים...<br>קמנו רק כי לא היה לנו נעים לסרב.<br>ואז<br>וואו!!!<br>איזה קסם!!!<br>תוך שניות נדבקנו בהתלהבות שלך, לא שמנו לב שחם, שהשמש מסנוורת, התלהבנו מהמשימות כאילו זו פעם ראשונה שביקשו מאיתנו לעשות אותן. מדהים איך ההנחיה המקצועית שלך, ההתלהבות ותשומת הלב הפכו odt שגרתי לחוויה מלהיבה וחדשה!<br>לא רצינו להפסיק...<br>הצלחת להדליק את כל הקבוצה, לפרגן, להאיר את תשומת הלב למה שקורה בינינו ולהוריד כמה וכמה מחסומים.<br>היה קצר אבל כל כך כיף ומחבר!!<br>אין כמוך, תודה רבה</p>
-        <div class="attr">
-          <div class="avatar">יע</div>
-          <div class="who">
-            <div class="name">יעל</div>
-            <div class="role">מחנכת</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="corp">
-        <div class="tag tag-corp">הייטק</div>
-        <div class="mark">”</div>
-        <p class="body">חיפשנו פעילות מעניינת וחוויתית ליום גיבוש של צוות הפיתוח. מההתקשרות הראשונה עם יאיר הרגשנו בידיים טובות, החל מהבנת הצרכים והדינמיקה הייחודית בצוות ועד התאמה של הפעילות לסוג האוכלוסיה. ההפעלה עצמה היתה מעבר לציפיות. כל שכבות הציניות קולפו תוך זמן קצר מאוד, ההדרכה וההובלה של יאיר ואביתר הביאו את אנשי הצוות לדינמיקה חדשה ותוצאות מפתיעות יחד עם כיף וצחוקים! בעיבוד בסיום הפעילות כולם פה אחד אמרו שהיה יום שלא יישכח ומצפים להזדמנות הבאה!</p>
-        <div class="attr">
-          <div class="avatar">יה</div>
-          <div class="who">
-            <div class="name">יהושע</div>
-            <div class="role">עובד בתעשייה ביטחונית</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="army">
-        <div class="tag tag-army">צבא</div>
-        <div class="mark">”</div>
-        <p class="body">ליאיר ואביתר, צוות "בשביל הלב" היקרים, תודה מעומק הלב על הפעילות המיוחדת והמרגשת שיצרתם עבור משלחת בני ובנות המצווה ממשפחות השכול. ברגישות, מקצועיות ולב פתוח הצלחתם לחבר, לגבש ולהעניק לילדים חוויה משמעותית של תקווה, העצמה ושייכות. תודה על הדרך שאתם עושים בשביל הלב, בדיוק.</p>
-        <div class="attr">
-          <div class="avatar">אל</div>
-          <div class="who">
-            <div class="name">אסף לוי</div>
-            <div class="role">סא"ל מיל', מפקד משלחת LEGACY</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="army">
-        <div class="tag tag-army">צבא</div>
-        <div class="mark">”</div>
-        <p class="body">הכרתי את יאיר בפעילות חברתית מגבשת של משפחות האחים השכולים מהר מאוד התאהבתי בבן אדם ובאופטימיות שהוא מעביר תוך כדי, התשוקה האנרגיות והמסרים המחזקים שהוא מעביר במשך הפעילות גרמו לי להבין שעומד מולי אדם שאוהב לעשות את מה שהוא עושה יותר נכון "מצא את ייעודו" מיד בסיום הפעילות ניגשתי אליו ואמרתי לו בחיוך רחב "אתה אדם השראה אדם שחוזר הביתה בחיוך כי אתה מצאת את הטוב שבך והתחלת לעסוק בו ולפזר אותו לאחרים בין אם זה לאנשים 'רגילים' או למשפחות שכולות אתה אדם שיודע את הדרך והגישה ללב האדם תוך כדי פעילות אני מעריץ אותך המון ומקווה שרק תמשיך ככה" סיימנו בחיבוק חזק ואמרתי לעצמי איזה אנשים מדהימים יש לנו במדינה תודה על הזכות</p>
-        <div class="attr">
-          <div class="avatar">אד</div>
-          <div class="who">
-            <div class="name">אהרון דנינו</div>
-            <div class="role">אחיו של אורי דנינו ז"ל אשר נחטף ונרצח בשבי החמאס</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="edu">
-        <div class="tag tag-edu">חינוך</div>
-        <div class="mark">”</div>
-        <p class="body">תודה לה' שבחרנו באביתר ובשאר הצוות המדהים של "בשביל הלב" להעביר לנו ODT והיה מדהים מדהים מדהים! החבר'ה היו שותפים גם בנוכחות וגם בפעילויות עצמן, שכבר זה הישג גדול אצלנו. המחנכים עברו תהליך חיבור משמעותי אל הכיתה וכל האווירה הייתה חמה מקצועית וטובה. המדריכים תותחים, הפעילויות מעולות, וכל מה שנותר לומר זה רק תודה ושתצליחו בגדול</p>
-        <div class="attr">
-          <div class="avatar">בה</div>
-          <div class="who">
-            <div class="name">צוות חינוכי</div>
-            <div class="role">אחרי סדנת ODT לכיתה</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="army">
-        <div class="tag tag-army">צבא</div>
-        <div class="mark">”</div>
-        <p class="body">עברתי היום סדנא של "בשביל הלב" לקראת התחלת תפקידי כמפקצית בבה"ד 1.<br><br>חשוב לי לפרגן מכל הלב, ולהגיד שהאנשים שם ממש מעולים ונעימים. יודעים איך לקחת קבוצה ולהוציא ממנה את המיטב, בצורה הכי מהנה.<br><br>הפעילויות מגבשות, מהנות, ומחזירות אותנו למקום יותר משוחרר וקליל.<br><br>חווינו עבודה בצוות, שיתוף פעולה, היכרות מעמיקה והמון צחוק.<br><br>ממליצה בחום, אנשים שבאים לתת מכל הלב.</p>
-        <div class="attr">
-          <div class="avatar">מפ</div>
-          <div class="who">
-            <div class="name">מפקצית</div>
-            <div class="role">בה"ד 1</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="edu">
-        <div class="tag tag-edu">חינוך</div>
-        <div class="mark">”</div>
-        <p class="body">ההבדל בין מדריך טוב למדריך פצצה זה אתה יאיר!<br><br>ההצלחה והשיתוף פעולה של הקבוצה היתה המראה לאנרגיות שהבאת! הפרגון שהרים אותן והניע להגיע להישגים גבוהים יותר... תשומת הלב האישית לבנות, בשם, בקריאה, בזיהוי נקודות החוזק, בפרגון אישי וחלוקת תפקידים... גרם להן להתגייס ולצלוח בהנאה את המשימות.<br><br>המשימות היו מאתגרות אבל גם ממש כיפיות ועם המון סיפוק!<br><br>פעילות מוצלחת ממש עם מדריך תותח! תודה רבה!</p>
-        <div class="attr">
-          <div class="avatar">רכ</div>
-          <div class="who">
-            <div class="name">רכזת קבוצה</div>
-            <div class="role">סדנת בנות</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="fam">
-        <div class="tag tag-fam">משפחות</div>
-        <div class="mark">”</div>
-        <p class="body">חגגנו יום הולדת תשעים לאמא שלי, והזמנו פעילות לכל המשפחה מחברת "בשביל הלב". הייתי מאד סקפטי אם ניתן לעשות פעילות שתצליח לכלול את כולם, מילדים קטנים עד אמא בת התשעים. בנוסף, אני בדרך כלל לא "מתחבר" לפעילויות של משחקי חברה וספורט וכד'.<br><br>להפתעתי ולשמחתי, הפעילות היתה נהדרת, מרתקת, מחברת וכיפית, והיא אכן הצליחה לכלול את כולם חוץ מהתינוקות (שארגנו להם פעילות מתאימה). ואפילו אני ה"כבד" מאד נהינתי. מנחה הקבוצה היה יאיר בלוך, והוא הוביל את הקבוצה בטוב טעם ובמקצועיות. מומלץ ביותר!</p>
-        <div class="attr">
-          <div class="avatar">חי</div>
-          <div class="who">
-            <div class="name">חיים</div>
-            <div class="role">יום הולדת 90 לאמא</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="quote-card" data-cat="edu">
-        <div class="tag tag-edu">חינוך</div>
-        <div class="mark">”</div>
-        <p class="body">רק באמת להגיד כמה היו לפעילות את כל התנאים לכישלון.<br><br>פעילות חוץ, חום ולחות מוגזמים, חבר'ה בגיל שמחפש את מה "שמגניב" ולא תמיד מצליח להחזיק את הערך בדברים..<br><br>ותקשיבו, שהייתם פשוט מדוייקים!<br><br>החבר'ה עפו באוויר, עפו על הצוות שלכם (שלא פגשתי אישית, אבל שמעתי מהחבר'ה כמה הם היו נגישים, דיברו ללב שלהם וידעו להפעיל מהמקומות הנכונים והאמיתיים. שזה כל כך קשה וכל כך מוערך!) עפו על הפעילות! הם אשכרה עצרו אותנו בשבילים כדי להגיד כמה היה מטורף ומשמעותי!!<br><br>תודה ענקית לכם!!! מעריכים ברמות!<br><br>תמשיכו לעשות טוב ולהוסיף כזה אור!</p>
-        <div class="attr">
-          <div class="avatar">על</div>
-          <div class="who">
-            <div class="name">עתרת לנקרי</div>
-            <div class="role">רכזת סמינריון הדרכה בנ"ע צפון</div>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <div style="margin-top:56px; text-align:center;" data-reveal>
-      <a href="https://wa.me/972528990156?text=שלום,%20רוצה%20לראות%20עוד%20דוגמאות%20מתאימות%20לקבוצה%20שלי" target="_blank" class="btn-ghost" style="display:inline-flex">
-        רוצים לראות דוגמאות מותאמות לקבוצה שלכם?
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- PROCESS -->
 <section class="process" id="how">
   <div class="wrap">
@@ -2048,7 +2103,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 <section class="final-cta">
   <div class="wrap">
     <h2 data-reveal>מוכנים להעניק לצוות שלכם<br/>יום שהם <em>יזכרו</em>?</h2>
-    <p data-reveal>15 דקות שיחה ונבין אם אנחנו מתאימים. בלי לחץ, בלי התחייבות.</p>
+    <p data-reveal>15 דקות שיחה ונבין אם אנחנו מתאימים.</p>
     <div class="cta-row" data-reveal>
       <a href="https://wa.me/972528990156?text=שלום,%20אשמח%20לתאם%20שיחת%20היכרות" target="_blank" class="btn-primary" style="font-size:19px; padding: 22px 38px;">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4a10 10 0 00-17 10l-1 6 6-1.5A10 10 0 1020 4zM12 20a8 8 0 01-4-1.1l-.3-.2-3.5.9.9-3.4-.2-.3A8 8 0 1112 20zm4.3-5.7c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5 0-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4.2-.3c.1-.2 0-.3-.1-.4l-.6-1.5c-.2-.4-.3-.3-.5-.3h-.4c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5.6.2 1 .4 1.4.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
@@ -2277,7 +2332,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       if (card.querySelector('.v-placeholder')) return;
       const ph = document.createElement('div');
       ph.className = 'v-placeholder';
-      ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;font-family:FUP Begin,Rubik,sans-serif;font-size:14px;background:rgba(20,12,8,.7);z-index:5;line-height:1.5';
+      ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;font-family:Tzalmon,Times New Roman,serif;font-size:14px;background:rgba(20,12,8,.7);z-index:5;line-height:1.5';
       ph.innerHTML = 'הסרטון יועלה בקרוב.<br/><span style="opacity:.75;font-size:12px;display:block;margin-top:8px">לצפייה בעוד דוגמאות, שלחו לנו הודעה.</span>';
       card.appendChild(ph);
       return;
