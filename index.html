@@ -574,8 +574,11 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     border:0;
     z-index:2;
   }
-  .vcard > img{ opacity:.78; transition: opacity .4s, transform .6s; }
-  .vcard:hover > img{ opacity:.92; transform: scale(1.03); }
+  .vcard > img,
+  .vcard > video.vcover{ opacity:.78; transition: opacity .4s, transform .6s; }
+  .vcard:hover > img,
+  .vcard:hover > video.vcover{ opacity:.92; transform: scale(1.03); }
+  .vcard > video.vcover{ object-fit: cover; pointer-events:none; }
   .vcard .veil{
     position:absolute; inset:0;
     background: linear-gradient(to top, rgba(20,12,8,.85) 0%, rgba(20,12,8,.25) 50%, rgba(20,12,8,0) 75%);
@@ -618,7 +621,8 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   .vcard.is-playing .vplay,
   .vcard.is-playing .veil,
   .vcard.is-playing .vchip,
-  .vcard.is-playing > img{ display:none; }
+  .vcard.is-playing > img,
+  .vcard.is-playing > video.vcover{ display:none; }
 
   /* ---------- AUDIENCE ---------- */
   .audience{ background: var(--paper); }
@@ -1816,6 +1820,8 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
   <div class="wrap">
     <div class="strip">
+      <div class="shot"><img src="assets/a.jpeg" alt=""></div>
+      <div class="shot"><img src="assets/b.jpeg" alt=""></div>
       <div class="shot"><img src="assets/girls-bridge.jpeg" alt=""></div>
       <div class="shot"><img src="assets/team-archery.jpeg" alt=""></div>
       <div class="shot"><img src="assets/hero-hoop.jpeg" alt=""></div>
@@ -1842,7 +1848,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     <div class="vtest-strip">
       <div class="vtest-item" data-reveal>
         <div class="vcard" data-video="assets/videos/rec-1.mp4">
-          <img src="assets/army-circle.jpeg" alt="">
+          <video class="vcover" src="assets/videos/rec-1.mp4#t=0.5" preload="metadata" muted playsinline disablepictureinpicture></video>
           <div class="veil"></div>
           <div class="vchip">המלצה</div>
           <div class="vplay">
@@ -1865,7 +1871,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
       <div class="vtest-item" data-reveal>
         <div class="vcard" data-video="assets/videos/rec-2.mp4">
-          <img src="assets/girls-bridge.jpeg" alt="">
+          <video class="vcover" src="assets/videos/rec-2.mp4#t=0.5" preload="metadata" muted playsinline disablepictureinpicture></video>
           <div class="veil"></div>
           <div class="vchip">המלצה</div>
           <div class="vplay">
@@ -1888,7 +1894,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
       <div class="vtest-item" data-reveal>
         <div class="vcard" data-video="assets/videos/rec-3.mp4">
-          <img src="assets/adults-sticks.jpeg" alt="">
+          <video class="vcover" src="assets/videos/rec-3.mp4#t=0.5" preload="metadata" muted playsinline disablepictureinpicture></video>
           <div class="veil"></div>
           <div class="vchip">המלצה</div>
           <div class="vplay">
@@ -1911,7 +1917,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
       <div class="vtest-item" data-reveal>
         <div class="vcard" data-video="assets/videos/rec-4.mp4">
-          <img src="assets/army-men-circle.jpeg" alt="">
+          <video class="vcover" src="assets/videos/rec-4.mp4#t=0.5" preload="metadata" muted playsinline disablepictureinpicture></video>
           <div class="veil"></div>
           <div class="vchip">המלצה</div>
           <div class="vplay">
@@ -1934,7 +1940,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
       <div class="vtest-item" data-reveal>
         <div class="vcard" data-video="assets/videos/rec-5.mp4">
-          <img src="assets/army-handcuffs.jpeg" alt="">
+          <video class="vcover" src="assets/videos/rec-5.mp4#t=0.5" preload="metadata" muted playsinline disablepictureinpicture></video>
           <div class="veil"></div>
           <div class="vchip">המלצה</div>
           <div class="vplay">
@@ -1957,7 +1963,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
       <div class="vtest-item" data-reveal>
         <div class="vcard" data-video="assets/videos/rec-6.mp4">
-          <img src="assets/girls-sticks.jpeg" alt="">
+          <video class="vcover" src="assets/videos/rec-6.mp4#t=0.5" preload="metadata" muted playsinline disablepictureinpicture></video>
           <div class="veil"></div>
           <div class="vchip">המלצה</div>
           <div class="vplay">
@@ -1980,7 +1986,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
       <div class="vtest-item" data-reveal>
         <div class="vcard" data-video="assets/videos/rec-7.mp4">
-          <img src="assets/instructor-running.jpeg" alt="">
+          <video class="vcover" src="assets/videos/rec-7.mp4#t=0.5" preload="metadata" muted playsinline disablepictureinpicture></video>
           <div class="veil"></div>
           <div class="vchip">המלצה</div>
           <div class="vplay">
@@ -2337,7 +2343,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
       card.appendChild(ph);
       return;
     }
-    const existing = card.querySelector(':scope > video, :scope > iframe');
+    const existing = card.querySelector(':scope > video:not(.vcover), :scope > iframe');
     if (existing){
       if (existing.tagName === 'VIDEO'){
         if (existing.paused) existing.play().catch(()=>{});
@@ -2365,11 +2371,24 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
     });
   });
 
+  // Force cover videos to paint a real seeked frame (some browsers won't render
+  // the #t=N fragment frame on a paused element until it's been played briefly).
+  document.querySelectorAll('.vcard > video.vcover').forEach(v=>{
+    const seekTo = 0.5;
+    const nudge = ()=>{ try{ v.currentTime = seekTo; }catch(e){} };
+    v.addEventListener('loadedmetadata', nudge, { once:true });
+    v.addEventListener('canplay', ()=>{
+      const p = v.play();
+      if (p && p.then) p.then(()=>{ v.pause(); nudge(); }).catch(()=> nudge());
+      else { v.pause(); nudge(); }
+    }, { once:true });
+  });
+
   document.querySelectorAll('.vcard-mute').forEach(btn=>{
     btn.addEventListener('click', (e)=>{
       e.stopPropagation();
       const vcard = btn.closest('.vtest-item')?.querySelector('.vcard');
-      const vid = vcard?.querySelector(':scope > video');
+      const vid = vcard?.querySelector(':scope > video:not(.vcover)');
       if (!vid) return;
       vid.muted = !vid.muted;
       syncMuteUi(btn, vid);
